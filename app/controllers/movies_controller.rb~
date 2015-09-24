@@ -10,34 +10,8 @@ class MoviesController < ApplicationController
     # will render app/views/movies/show.<extension> by default
   end
 
-
   def index
     @movies = Movie.all
-    if(@ticked != nil)
-        @movies= @movies.find_all{ |m| @ticked.hs_key?(m.rating) and @ticked[m.rating]==true}
-    end
-   
-
-	if(params[:sort].to_s == 'title')
-	@movies = @movies.sort_by{|m| m.title }
-	elsif(params[:sort].to_s == 'release')
-	@movies= @movies.sort_by{|m| m.release_date.to_s }
-	end
-	if(params[:ratings] != nil)
-        @movies = @movies.find_all{ |m| params[:ratings].has_key?(m.rating) }
-        end
-
-	@ticked = {}
-        @all_ratings = ['G','PG','PG-13','R']
-
-        @all_ratings.each { |rating|
-                if params[:ratings] == nil
-                @ticked[rating] = false
-                else
-                @ticked[rating] = params[:ratings].has_key?(rating)
-                end
-                }
-
   end
 
   def new
@@ -69,4 +43,3 @@ class MoviesController < ApplicationController
   end
 
 end
-
