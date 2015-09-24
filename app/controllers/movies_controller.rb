@@ -10,13 +10,14 @@ class MoviesController < ApplicationController
     # will render app/views/movies/show.<extension> by default
   end
 
+
   def index
     @movies = Movie.all
-    if(params[:sort].to_s == 'title')
+        if(params[:sort].to_s == 'title')
         @movies = @movies.sort_by{|m| m.title }
-    elsif(params[:sort].to_s == 'release')
+        elsif(params[:sort].to_s == 'release')
         @movies= @movies.sort_by{|m| m.release_date.to_s }
-    end
+        end
   end
 
   def new
@@ -48,3 +49,4 @@ class MoviesController < ApplicationController
   end
 
 end
+
